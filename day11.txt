@@ -1,0 +1,139 @@
+Question 01
+--------------
+Using Command Prompt on a Windows system, write the exact commands to complete the
+following tasks:
+. Create New directories named CSC2244, Marks and Exam on your Desktop.
+. Inside the CSC2244 directory, create three subdirectories named practical, theory, and exam
+papers.
+. Inside each subdirectories, create a text file, a Word document, and a PowerPoint document
+respectively:
+Ex
+Practical -+Word document, PowerPoint document, text file
+. Create two new excel files in desktop named Icae.Marks and Final.Exan Marks and move that files
+into the directory Marks
+. Copy the Directory Marks into the Exam directory and hide the Exam directory
+
+Answer:
+
+mkdir CSC2244
+cd CSC2244
+
+mkdir practical 
+cd practical
+echo. > practical.txt
+echo. > practical.docx
+echo. > practical.pptx
+cd..
+
+mkdir theory 
+cd theory
+echo. > theory.txt
+echo. > theory.docx
+echo. > theory.pptx
+cd..
+
+mkdir "exam papers"
+cd exam_papers
+echo. > exam_papers.txt
+echo. > exam_papers.docx
+echo. > exam_papers.pptx
+cd..
+
+mkdir Marks 
+mkdir Exam
+
+
+:: Move Excel files to the Marks directory
+move "%USERPROFILE%\Desktop\Icae Marks.xlsx" "%USERPROFILE%\Desktop\Marks"
+move "%USERPROFILE%\Desktop\Final Exam Marks.xlsx" "%USERPROFILE%\Desktop\Marks"
+
+:: Copy Marks directory into Exam and hide Exam
+xcopy "%USERPROFILE%\Desktop\Marks" "%USERPROFILE%\Desktop\Exam\Marks" /E /I
+attrib +h "%USERPROFILE%\Desktop\Exam"
+
+-----------------------------------------------------------------------------------------------------------
+Question 02
+------------
+
+
+1.Filter the rows where the GPA greater than 3.5
+code:
+awk -F, 'NR==1 || $4>3.5' data.csv
+
+output:
+ID,Name,Major,GPA
+2,Jane Smith,Mathematics,3.8
+3,Mark Taylor,Engineering,3.6
+5,Michael Brown,Chemistry,3.9
+6,Jessica Wilson,Physics,3.7
+
+Explanation:
+'NR==1 || $4>3.5': 
+NR is the "Number of Record," meaning the current line number in the input file.
+NR==1 means "if this is the first line" (typically the header line).
+So, this part says: always print the first line (header row).
+$4>3.5
+$4 means "the value of the 4th field (column)" in the current line.
+This checks if the 4th field (GPA) is greater than 3.5.
+
+
+
+2.Calculate the average GPA of all students
+code:
+--------
+awk -F, 'NR>1 {sum+=$4; count++} END {if(count>0) print "Average GPA:", sum/count}' data.csv
+
+output:
+--------
+Average GPA: 3.55
+
+Explanation:
+---------------
+'NR>1 {sum+=$4; count++} END {if(count>0) print "Average GPA:", sum/count}': The awk program with two blocks:
+
+NR>1 {sum+=$4; count++}
+NR = current line number (record number).
+NR>1 means this block applies to all lines except the first line (which is usually the header).
+sum+=$4 means add the value in the 4th field (GPA) of the current line to the variable sum.
+count++ increments the variable count by 1 — keeping track of how many GPAs we have added.
+Essentially, this block accumulates the total GPA and counts the number of students.
+
+END {if(count>0) print "Average GPA:", sum/count}
+The END block runs after processing all input lines.
+It checks if count is greater than 0 (to avoid division by zero).
+
+----------------------------------------------------------------------------------------------------------------
+
+Question 03
+----------------
+
+1. Read two Strings from user String_1 and String.2
+2. Count the characters of each String and print the lengthy String as shown in the Expected output
+
+code:
+
+# Read two strings from the user
+read -p "Enter String_1: " str1
+read -p "Enter String_2: " str2
+
+# Get the length of both strings
+len1=${#str1}
+len2=${#str2}
+
+# Compare the lengths and print the larger string
+if [ $len1 -gt $len2 ]; then
+    echo "$str1 is larger than $str2"
+elif [ $len2 -gt $len1 ]; then
+    echo "$str2 is larger than $str1"
+else
+    echo "Both strings are of equal length"
+fi
+
+ 
+Expected output :
+
+Enter String_1
+Apple
+Enter String_2
+Banana
+Banana is larger than Apple

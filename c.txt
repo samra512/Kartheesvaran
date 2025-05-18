@@ -1,0 +1,23 @@
+C programe
+===============
+
+1.extenstion: .c
+
+2. File Permission: gcc file.c -o file
+ 
+gcc: Stands for GNU Compiler Collection; it compiles C programs.
+file.c: The name of the C program file.
+-o file: This specifies the output file name. The compiled program is saved as file (you can name it anything you want).
+After running this command, you get an executable named file
+
+
+3. To Run :./file
+
+4.Basic syntax
+
+#include <stdio.h>  //ncludes the Standard Input Output Library
+int main(){
+  printf("Hello world!");
+  
+  return 0;
+}
